@@ -1,6 +1,7 @@
 const express = require("express");
-const postRouter = require("./modules/posts/post.routes");
+const { postRouter } = require("./modules/posts/post.routes");
 const { dbConnect } = require("./config/dbconnect");
+const { authRouter } = require("./modules/users/auth.route");
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.get("/", (req, res) => {
   res.status(200)("welcome to my server.use /posts to get all posts");
 });
 
+app.use("/auth", authRouter);
 app.use("/posts", postRouter);
 
 async function start() {
